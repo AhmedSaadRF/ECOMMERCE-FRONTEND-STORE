@@ -22,8 +22,34 @@ import About from "./pages/About";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUser } from "./store/slices/authSlice";
+import { fetchAllProducts } from "./store/slices/productSlice";
+import { Loader } from "lucide-react";
 
 const App = () => {
+  const { authUser, isCheckingAuth } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(getUser());
+  }, [getUser]);
+
+  useEffect(() => {
+    dispatch(fetchAllProducts({}));
+  }, []);
+
+  const { products } = useSelector((state) => state.product);
+
+  if ((isCheckingAuth && !authUser) || !products) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    )
+  }
+  
   return (
     <>
       <ThemeProvider>
