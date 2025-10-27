@@ -79,7 +79,7 @@ const ProductSlider = ({ title, products }) => {
                     <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                       {product.name}
                     </h3>
-                    {/* PRODUCT RATINGs */}
+                    {/* PRODUCT RATINGS */}
                     <div className="flex items-center space-x-2 mb-2">
                       <div className="flex items-center">
                         {[...Array(5)].map((_, i) => {
